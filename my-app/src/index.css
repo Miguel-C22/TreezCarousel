@@ -1,0 +1,10 @@
+body {
+ margin: 0;
+ padding: 0;
+}
+
+/* Carousel */
+.carousel_container{
+  display: flex;
+  gap: 20px;
+}
