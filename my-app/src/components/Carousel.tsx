@@ -39,7 +39,7 @@ function Carousel() {
   const endIndex = startIndex + itemsPerPage;
 
   const itemsToDisplay = itemsFiltered ? filteredItems.slice(startIndex, endIndex) : allItems.slice(startIndex, endIndex);
-  
+
   setDisplayedItems(itemsToDisplay);
  }
 
@@ -93,23 +93,34 @@ function Carousel() {
 
   return (
       <div className="carousel_container">
-        <form action="" onSubmit={handleSubmit}>
+        <div className='drawer_container'>
+          <DrawerCatagories onSelectCategory={handleSelectCategoryOrBrand} />
+          <DrawerBrands onSelectBrand={handleSelectCategoryOrBrand} />
+        </div>
+
+        <form action="" onSubmit={handleSubmit} className="form_container">
           <input
           type="text" 
           onChange={(e) => setInputValue(e.target.value)}
           />
-          <button type='submit' >search</button>
+          <button type='submit' >Search</button>
         </form>
+
+        <div className='carousel'>
           {displayedItems.map((item) => (
-              <div key={item.id} onClick={() => {toggleModal(item)}}>
-                  <h2 key={item.name}>{item.name}</h2>
-                  <img key={item.images[0]} src={item.images[0]} alt={item.name} />
-              </div>
-          ))}
-          <Paging totalPages={totalPages} onPageChange={handlePageChange} />
-          <DrawerCatagories onSelectCategory={handleSelectCategoryOrBrand} />
-          <DrawerBrands onSelectBrand={handleSelectCategoryOrBrand} />
-          {!toggleOnAndOff ? <></> : <Modal item={modalItem}/> }
+                <div className='item_container' key={item.id} onClick={() => {toggleModal(item)}}>
+                    <img className='carousel_Images' key={item.images[0]} src={item.images[0]} alt={item.name} />
+                    <div className='carousel_item_description'>
+                      <h4>{item.name}</h4>
+                      <h4>${item.price.toFixed(2)}</h4>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <Paging totalPages={totalPages} onPageChange={handlePageChange} />
+
+        {!toggleOnAndOff ? <></> : <Modal item={modalItem} toggleOnAndOff={toggleOnAndOff} toggle={toggle}/> }
           
       </div>
   );

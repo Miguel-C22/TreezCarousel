@@ -1,12 +1,12 @@
 export interface BaseModel {
     id: string; // A unique identifier for the object
+    price: number
   }
   
   export enum ProductStatus {
-    Active = "active", // The product is available for purchase and in stock
     Discontinued = "discontinued", // The product is no longer being produced or sold
-    Discount = "discount", // The product is being sold at a reduced price
     Regular = "regular", // The product is being sold at its standard price
+    Sale = "on_sale", // The product is being sold at its standard price
     LowStock = "low_stock", // The product is in stock but the quantity is low
     OutOfStock = "out_of_stock", // The product is currently not in stock
     PreOrder = "pre_order", // The product can be pre-ordered before it is available
