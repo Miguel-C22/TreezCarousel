@@ -1,4 +1,4 @@
-import { Product, BaseModel, ProductStatus} from './../schema/products';
+import { Product, BaseModel, ProductStatus} from '../schema/products';
 
 const products: Product[] = [
     {

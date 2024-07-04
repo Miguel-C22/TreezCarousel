@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import brands from '../data/brands';
+import allBrands from '../data/allBrands';
 
 interface DrawerProps {
   onSelectBrand: (brand: string) => void; // Define the prop type for onSelectCategory
@@ -38,9 +38,9 @@ const DrawerBrands: React.FC<DrawerProps> = ({ onSelectBrand }) => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {brands.map((brand) => (
+        {allBrands.map((brand) => (
           <ListItem key={brand.id} disablePadding>
-            <ListItemButton onClick={() => onSelectBrand(brand.brand)}>
+            <ListItemButton onClick={() => onSelectBrand(brand.brand)}> {/* Passing the brand name to this prop function that is in the Carousel Component which will then filter items based off of brand names */}
               <ListItemText primary={brand.brand} />
             </ListItemButton>
           </ListItem>

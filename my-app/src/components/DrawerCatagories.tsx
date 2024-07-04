@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import catagories from '../data/catagories';
+import allCatagories from '../data/allCatagories';
 
 interface DrawerProps {
   onSelectCategory: (category: string) => void; // Define the prop type for onSelectCategory
@@ -38,9 +38,9 @@ const DrawerCatagories: React.FC<DrawerProps> = ({ onSelectCategory }) => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {catagories.map((category) => (
+        {allCatagories.map((category) => (
           <ListItem key={category.id} disablePadding>
-            <ListItemButton onClick={() => onSelectCategory(category.category)}>
+            <ListItemButton onClick={() => onSelectCategory(category.category)}> {/* Passing the category to this prop function that is in the Carousel Component which will then filter items based off of category */}
               <ListItemText primary={category.category} />
             </ListItemButton>
           </ListItem>

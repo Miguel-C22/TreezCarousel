@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import items from '../data/items'
+import allItems from '../data/allItems'
 import { Product } from './../schema/products';
 import Paging from './Paging';
 import DrawerCatagories from './DrawerCatagories';
@@ -22,37 +22,49 @@ function Carousel() {
 
   //Modal
   const [modalItem, setModalItem] = useState<object>({})
-  const { value, toggle} = useToggle(false);
+  const { toggleOnAndOff, toggle} = useToggle(false);
 
   useEffect(() => {
-    const totalItems = inputValue || categorySelect ? filteredItems.length : items.length;
-    setTotalPages(Math.ceil(totalItems / itemsPerPage));
-
-    const startIndex = currentPage * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    const itemsToDisplay = inputValue || categorySelect ? filteredItems.slice(startIndex, endIndex) : items.slice(startIndex, endIndex);
-    setDisplayedItems(itemsToDisplay);
+    carouselSetup()
   }, [currentPage, itemsPerPage, filteredItems]);
+
+ const carouselSetup = () => {
+  
+  const itemsFiltered = (inputValue || categorySelect)
+
+  const totalItems = itemsFiltered ? filteredItems.length : allItems.length;
+  setTotalPages(Math.ceil(totalItems / itemsPerPage));
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const itemsToDisplay = itemsFiltered ? filteredItems.slice(startIndex, endIndex) : allItems.slice(startIndex, endIndex);
+  
+  setDisplayedItems(itemsToDisplay);
+ }
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page - 1);
   };
 
+
+  const getFilteredItems = (filterInput: string) => {
+    const lowercaseInput = filterInput.toLowerCase();
+        return allItems.filter((item) => {
+          return (
+            item.brand.toLowerCase().includes(lowercaseInput) ||
+            item.name.toLowerCase().includes(lowercaseInput) ||
+            item.productCategory.toLowerCase().includes(lowercaseInput) ||
+            item.productSubCategory.toLowerCase().includes(lowercaseInput)
+          );
+        })
+  }
+
   //User input Selection
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const lowercaseInput = inputValue.toLowerCase();
-
-    const filteredItems = items.filter((item) => {
-      return (
-        item.brand.toLowerCase().includes(lowercaseInput) ||
-        item.name.toLowerCase().includes(lowercaseInput) ||
-        item.productCategory.toLowerCase().includes(lowercaseInput) ||
-        item.productSubCategory.toLowerCase().includes(lowercaseInput)
-      );
-    })
+    const filteredItems = getFilteredItems(inputValue)
 
     setFilteredItems(filteredItems);
     setCurrentPage(0);
@@ -60,23 +72,12 @@ function Carousel() {
 
   //Category Selection
   const handleSelectCategoryOrBrand = (category: string) => {
-    console.log("Selected category:", category);
-  
-    const lowercaseInput = category.toLowerCase();
 
     if(category === 'All'){
-      setFilteredItems(items)
+      setFilteredItems(allItems)
     }else{
-        const filteredItems = items.filter((item) => {
-        return (
-          item.brand.toLowerCase().includes(lowercaseInput) ||
-          item.name.toLowerCase().includes(lowercaseInput) ||
-          item.productCategory.toLowerCase().includes(lowercaseInput) ||
-          item.productSubCategory.toLowerCase().includes(lowercaseInput)
-        );
-      });
-      console.log("Filtered items:", filteredItems);
-  
+      const filteredItems = getFilteredItems(category)
+
       setCategorySelect(category)
       setFilteredItems(filteredItems);
     }
@@ -87,7 +88,6 @@ function Carousel() {
   const toggleModal = (item: object) => {
     setModalItem(item)
     toggle()
-    console.log(value)
   }
 
 
@@ -109,7 +109,7 @@ function Carousel() {
           <Paging totalPages={totalPages} onPageChange={handlePageChange} />
           <DrawerCatagories onSelectCategory={handleSelectCategoryOrBrand} />
           <DrawerBrands onSelectBrand={handleSelectCategoryOrBrand} />
-          {!value ? <></> : <Modal item={modalItem}/> }
+          {!toggleOnAndOff ? <></> : <Modal item={modalItem}/> }
           
       </div>
   );
