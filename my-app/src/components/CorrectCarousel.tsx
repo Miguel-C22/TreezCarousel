@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import allItems from '../data/allItems'
 import { Product } from './../schema/products';
-import Paging from './Paging';
 import DrawerCatagories from './DrawerCatagories';
 import DrawerBrands from './DrawerBrands';
 import Modal from './Modal';
@@ -84,13 +83,12 @@ function CorrectCarousel() {
 
   const nextItem = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setCurrentIndex(currentIndex + 1)
+    setCurrentIndex((prevIndex) => prevIndex + 1);
   };
-  
+
   const backItem = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-  
-    setCurrentIndex(currentIndex - 1)
+    setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
 

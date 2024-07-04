@@ -366,6 +366,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     gap: 10px;
+    max-width: 80%;
   }
   .correct_Images {
     width: 200px;
@@ -405,7 +406,7 @@ body {
   border-radius: 8px;
   border-style: none;
   color: #0c2002;
-  font-size: .75rem;
+  font-size: 1rem;
   background-color: #a9e079;
   transition: background-color 0.3s ease; 
 }
@@ -416,7 +417,7 @@ body {
   border-radius: 8px;
   border-style: none;
   color: #0c2002;
-  font-size: .75rem;
+  font-size: 1rem;
   background-color: #a9e079;
   transition: background-color 0.3s ease; 
 }
