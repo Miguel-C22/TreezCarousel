@@ -61,13 +61,15 @@ function Carousel() {
   }
 
   //User input Selection
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const filteredItems = getFilteredItems(inputValue)
 
-    setFilteredItems(filteredItems);
-    setCurrentPage(0);
+    await setFilteredItems(filteredItems);
+    await setCurrentPage(0);
+    setInputValue("")
+    console.log(inputValue)
   };
 
   //Category Selection
@@ -101,7 +103,9 @@ function Carousel() {
         <form action="" onSubmit={handleSubmit} className="form_container">
           <input
           type="text" 
+          value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          required
           />
           <button type='submit' >Search</button>
         </form>
