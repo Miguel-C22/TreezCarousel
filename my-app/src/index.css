@@ -3,6 +3,19 @@ body {
  padding: 0;
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 100%; 
+}
+
+.logo {
+  max-width: 200px; 
+  width: 100%; 
+  height: auto; 
+}
+
 /* Carousel */
 .carousel_container {
   max-width: 800px;
@@ -10,7 +23,7 @@ body {
   flex-direction: column;
   gap: 20px;
   padding: 0 20px;
-  margin: 100px auto 0 auto;
+  margin: 0 auto;
 }
 
 .carousel {
