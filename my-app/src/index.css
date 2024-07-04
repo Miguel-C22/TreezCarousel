@@ -78,7 +78,13 @@ body {
   background-color: rgba(0, 0, 0, 0.5); 
   z-index: 10000;
   background-color: whitesmoke;
-  padding: 50px 0;
+  padding: 20px 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .modal_container {
+    padding: 100px 0;
+  }
 }
 
 .modal_item_content{
