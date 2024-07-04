@@ -15,18 +15,6 @@ const products: Product[] = [
     },
     {
         id: '2',
-        price: 20.12,
-        name: 'WYLD Pear 1000 mg CBD+CBG Gummies - 40 Count',
-        status: ProductStatus.LowStock,
-        productCategory: 'Gummies',
-        productSubCategory: 'Relaxed',
-        description: `We cultivated these flavors over the years, carefully honing our recipes to create edible delights that enhance every moment with real fruit and THC-free hemp. Perfect for preparing for life's adventures. It's a little like surfing the clouds on a surfboard made of pure energy. Sugar, Tapioca Syrup, Water, Pear Juice Concentrate, Gelatin, Coconut Oil, Natural Flavoring, Citric Acid, Malic Acid, Pectin (Pectin, Sodium Citrate), *Hemp Extract, Sunflower Lecithin Contains: Coconut`,
-        brandId: 'WYLD',
-        brand: 'WYLD',
-        images: ['/images/gummies/WYLD Pear 1000 mg CBD+CBG Gummies - 40 Count.avif']
-    },
-    {
-        id: '3',
         price: 30.88,
         name: 'WYLD Elderberry 250 mg Gummies - 10 Count',
         status: ProductStatus.OutOfStock,
@@ -38,7 +26,7 @@ const products: Product[] = [
         images: ['/images/gummies/WYLD Elderberry 250 mg Gummies - 10 Count.avif']
     },
     {
-        id: '4',
+        id: '3',
         price: 25.00,
         name: 'WYLD Lemon 250 mg Gummies - 10 Count',
         status: ProductStatus.Sale,
@@ -50,7 +38,7 @@ const products: Product[] = [
         images: ['/images/gummies/WYLD Lemon 250 mg Gummies - 10 Count.avif']
     },
     {
-        id: '5',
+        id: '4',
         price: 55.65,
         name: 'WYLD Blackberry 250 mg Gummies - 10 Count',
         status: ProductStatus.OutOfStock,
@@ -62,7 +50,7 @@ const products: Product[] = [
         images: ['/images/gummies/WYLD Blackberry 250 mg Gummies - 10 Count.avif']
     },
     {
-        id: '6',
+        id: '5',
         price: 35.00,
         name: 'WYLD Raspberry 1000 mg Gummies - 40 Count',
         status: ProductStatus.Sale,
@@ -74,7 +62,7 @@ const products: Product[] = [
         images: ['/images/gummies/WYLD Raspberry 1000 mg Gummies - 40 Count.avif']
     },
     {
-        id: '7',
+        id: '6',
         price: 42.00,
         name: 'WYLD Peach 250 mg Gummies - 10 Count',
         status: ProductStatus.PreOrder,
@@ -86,7 +74,7 @@ const products: Product[] = [
         images: ['/images/gummies/WYLD Peach 250 mg Gummies - 10 Count.avif']
     },
     {
-        id: '8',
+        id: '7',
         price: 48.56,
         name: 'Vireo | 10mg Milk Chocolate Chews | 10ct',
         status: ProductStatus.Sale,
@@ -98,7 +86,7 @@ const products: Product[] = [
         images: ['/images/chocolates/Vireo 10mg Milk Chocolate Chews.avif']
     },
     {
-        id: '9',
+        id: '8',
         price: 21.00,
         name: 'VIOLET TINCTURE - 25 mL BOTTLE',
         status: ProductStatus.PreOrder,
@@ -110,7 +98,7 @@ const products: Product[] = [
         images: ['/images/tincture/VIOLET TINCTURE - 25 mL BOTTLE.avif']
     },
     {
-        id: '10',
+        id: '9',
         price: 26.43,
         name: 'GREEN TINCTURE - 25 mL BOTTLE',
         status: ProductStatus.NewArrival,
@@ -122,7 +110,7 @@ const products: Product[] = [
         images: ['/images/tincture/GREEN TINCTURE - 25 mL BOTTLE.avif']
     },
     {
-        id: '11',
+        id: '10',
         price:34.19,
         name: 'RED EXTRA STRENGTH TINCTURE - 25 mL BOTTLE',
         status: ProductStatus.NewArrival,
@@ -134,7 +122,7 @@ const products: Product[] = [
         images: ['/images/tincture/RED EXTRA STRENGTH TINCTURE - 25 mL BOTTLE.avif']
     },
     {
-        id: '12',
+        id: '11',
         price: 32.34,
         name: 'YELLOW TINCTURE - 25 mL BOTTLE',
         status: ProductStatus.Discontinued,
@@ -146,7 +134,7 @@ const products: Product[] = [
         images: ['/images/tincture/YELLOW TINCTURE - 25 mL BOTTLE.avif']
     },
     {
-        id: '13',
+        id: '12',
         price: 27.00,
         name: 'INDIGO TINCTURE - 25 mL BOTTLE',
         status: ProductStatus.Regular,
