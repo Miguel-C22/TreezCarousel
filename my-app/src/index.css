@@ -417,3 +417,11 @@ body {
   font: bold;
   font-size: 2rem;
 }
+
+.correct_item_container.hidden {
+  display: none;
+}
+
+.correct_item_container.active {
+  display: block;
+}
