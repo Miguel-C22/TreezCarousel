@@ -22,10 +22,10 @@ function CorrectCarousel() {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredItems.length);
-      }, 7000);
+      }, 5000);
 
       return () => clearInterval(interval);
-    },[currentIndex])
+    },[filteredItems.length])
 
    
   
@@ -65,6 +65,10 @@ function CorrectCarousel() {
     const backItem = () => {
       setCurrentIndex((prevIndex) => (prevIndex - 1 + filteredItems.length) % filteredItems.length);
     };
+
+    const resetToAllItems = () => {
+        setFilteredItems(allItems);
+      };
 
   return (
     <div className="correct_carousel_container">
@@ -107,14 +111,18 @@ function CorrectCarousel() {
         <p className='searchError'>We do not carry this item</p>
       )}
 
+      {filteredItems.length > 0 ? 
       <div className='correct_carousel_btn'>
         <button type="button" className='backBtn' onClick={backItem}>Back</button>
         <button type="button" className='nextBtn' onClick={nextItem}>Next</button>
-      </div>
+      </div> 
+      :  
+      <button className='btn' onClick={resetToAllItems}>Back to all items</button>}
 
       {toggleOnAndOff && modalItem && (
         <Modal item={modalItem} toggleOnAndOff={toggleOnAndOff} toggle={toggle} />
       )}
+
     </div>
   );
 }
