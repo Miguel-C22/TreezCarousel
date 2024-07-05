@@ -410,3 +410,10 @@ body {
   transition: background-color 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.26) 2px 2px 10px 2px;
 }
+
+/*Search Error*/
+.searchError{
+  text-align: center;
+  font: bold;
+  font-size: 2rem;
+}

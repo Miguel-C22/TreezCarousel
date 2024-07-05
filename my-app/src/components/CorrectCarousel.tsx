@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import allItems from '../data/allItems'
 import { Product } from './../schema/products';
 import DrawerCatagories from './DrawerCatagories';
@@ -12,8 +12,10 @@ function CorrectCarousel() {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [filteredItems, setFilteredItems] = useState<Product[]>(allItems);
     const [inputValue, setInputValue] = useState<string>('');
+
     //For Modal Component
     const [modalItem, setModalItem] = useState<Product | null>(null);
+    
     //Hook
     const { toggleOnAndOff, toggle } = useToggle(false);
   
@@ -71,7 +73,7 @@ function CorrectCarousel() {
         <button type='submit'>Search</button>
       </form>
 
-       {filteredItems.length > 0 && (
+        {filteredItems.length > 0 ?
         <div className="correct_carousel">
           <div
             className="correct_item_container"
@@ -88,8 +90,7 @@ function CorrectCarousel() {
               <h4>${filteredItems[currentIndex].price.toFixed(2)}</h4>
             </div>
           </div>
-        </div>
-      )}
+        </div> : <p className='searchError'>We do not carry this item</p>}
 
       <div className='correct_carousel_btn'>
         <button type="button" className='backBtn' onClick={backItem}>Back</button>
