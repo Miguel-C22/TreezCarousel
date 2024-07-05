@@ -9,13 +9,12 @@ import useToggle from '../hooks/toggle';
 
 function CorrectCarousel() {
   //Carousel
-  const [displayedItems, setDisplayedItems] = useState<Product[]>([]);
+  const [displayedItems, setDisplayedItems] = useState<Product[]>([...allItems]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   //Filter Items for input and Drawer
   const [filteredItems, setFilteredItems] = useState<Product[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
-  const [categorySelect, setCategorySelect] = useState<string>('')
 
   //Modal
   const [modalItem, setModalItem] = useState<object>({})
@@ -28,12 +27,10 @@ function CorrectCarousel() {
  const carouselSetup = () => {
     const itemsToDisplay = filteredItems.length > 0 ? filteredItems : allItems;
 
-    // Adjust index to stay within bounds of items
-    let newIndex = Math.max(0, Math.min(currentIndex, itemsToDisplay.length - 1));
+    const newIndex = Math.max(0, Math.min(currentIndex, itemsToDisplay.length - 1));
     setCurrentIndex(newIndex);
-  
-    // Set items to display based on filtered items or all items
-    const displayed = itemsToDisplay.slice(newIndex, newIndex + 1);
+
+      const displayed = itemsToDisplay.slice(newIndex, newIndex + 1);
     setDisplayedItems(displayed);
  }
 
@@ -69,7 +66,6 @@ function CorrectCarousel() {
     }else{
       const filteredItems = getFilteredItems(category)
 
-      setCategorySelect(category)
       setFilteredItems(filteredItems);
     }
     setCurrentIndex(0);
@@ -81,51 +77,60 @@ function CorrectCarousel() {
     toggle()
   }
 
-  const nextItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setCurrentIndex((prevIndex) => prevIndex + 1);
+  const nextItem = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % (filteredItems.length || allItems.length));
+    console.log(displayedItems)
   };
 
-  const backItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setCurrentIndex((prevIndex) => prevIndex - 1);
+  const backItem = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + (filteredItems.length || allItems.length)) % (filteredItems.length || allItems.length));
   };
-
 
   return (
     <div className="correct_carousel_container">
-    <div className='drawer_container'>
+      <div className='drawer_container'>
         <DrawerCatagories onSelectCategory={handleSelectCategoryOrBrand} />
         <DrawerBrands onSelectBrand={handleSelectCategoryOrBrand} />
-    </div>
+      </div>
 
-    <form action="" onSubmit={handleSubmit} className="form_container">
+      <form onSubmit={handleSubmit} className="form_container">
         <input
-        type="text" 
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        required
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          required
         />
         <button type='submit'>Search</button>
-    </form>
+      </form>
 
-    <div className='correct_carousel'>
-        {displayedItems.map((item) => (
-        <div className='correct_item_container' key={item.id} onClick={() => {toggleModal(item)}}>
-            <img className='correct_carousel_Images' key={item.images[0]} src={item.images[0]} alt={item.name} />
+      <div className='correct_carousel'>
+        {displayedItems.length > 0 && (
+          <div
+            className='correct_item_container'
+            key={displayedItems[0].id}
+            onClick={() => toggleModal(displayedItems[0])}
+          >
+            <img
+              className='correct_carousel_Images'
+              src={displayedItems[0].images[0]}
+              alt={displayedItems[0].name}
+            />
             <div className='correct_carousel_item_description'>
-            <h4>{item.name}</h4>
-            <h4>${item.price.toFixed(2)}</h4>
+              <h4>{displayedItems[0].name}</h4>
+              <h4>${displayedItems[0].price.toFixed(2)}</h4>
             </div>
-        </div>
-        ))}
-    </div>
-    <div className='correct_carousel_btn'>
-            <button type="button" className='backBtn' onClick={backItem}>Back</button>
-            <button type="button" className='nextBtn' onClick={nextItem}>Next</button>
-        </div>
-    
-    {!toggleOnAndOff ? <></> : <Modal item={modalItem} toggleOnAndOff={toggleOnAndOff} toggle={toggle}/> }
+          </div>
+        )}
+      </div>
+
+      <div className='correct_carousel_btn'>
+        <button type="button" className='backBtn' onClick={backItem}>Back</button>
+        <button type="button" className='nextBtn' onClick={nextItem}>Next</button>
+      </div>
+
+      {toggleOnAndOff && modalItem && (
+        <Modal item={modalItem} toggleOnAndOff={toggleOnAndOff} toggle={toggle} />
+      )}
     </div>
   );
 }

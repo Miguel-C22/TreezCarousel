@@ -400,24 +400,13 @@ body {
   gap: 20px;
 }
 
-.nextBtn{
-  left: 0;
+.nextBtn, .backBtn{
   padding: 8px 20px;
   border-radius: 8px;
   border-style: none;
   color: #0c2002;
   font-size: 1rem;
   background-color: #a9e079;
-  transition: background-color 0.3s ease; 
-}
-
-.backBtn{
-  right: 0;
-  padding: 8px 20px;
-  border-radius: 8px;
-  border-style: none;
-  color: #0c2002;
-  font-size: 1rem;
-  background-color: #a9e079;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.26) 2px 2px 10px 2px;
 }

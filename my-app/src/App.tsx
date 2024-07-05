@@ -14,8 +14,8 @@ function App() {
       <div className="logo-container">
         <img className="logo" src="/images/Treez-Logo.png" alt="" />
       </div>
-      <button className="project_btn" onClick={toggleModal}>{toggleOnAndOff ? "See Correct Carousel 😎" : "See Wrong Carousel 😱"}</button>
       {toggleOnAndOff ? <Carousel /> : <CorrectCarousel />}
+      <button className="project_btn" onClick={toggleModal}>{toggleOnAndOff ? "See Correct Assignment 😎" : "See Wrong Assignment 😱"}</button>
     </div>
   );
 }
