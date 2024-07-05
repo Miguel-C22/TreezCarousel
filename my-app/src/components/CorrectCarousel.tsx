@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import allItems from '../data/allItems'
 import { Product } from './../schema/products';
 import DrawerCatagories from './DrawerCatagories';
@@ -18,6 +18,16 @@ function CorrectCarousel() {
     
     //Hook
     const { toggleOnAndOff, toggle } = useToggle(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredItems.length);
+      }, 7000);
+
+      return () => clearInterval(interval);
+    },[currentIndex])
+
+   
   
     const getFilteredItems = (filterInput: string): Product[] => {
       const lowercaseInput = filterInput.toLowerCase();
