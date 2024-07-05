@@ -380,16 +380,20 @@ body {
   top: 40%;
   transform: translateY(-50%);
   z-index: 10;
-  background-color: #a9e079;
   color: #333;
   border: none;
   cursor: pointer;
   border-radius: 10%;
   width: 40px;
   height: 80px;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: bold;
-  transition: background-color 0.3s;
+  background: none;
+}
+
+.backBtn:hover, .nextBtn:hover {
+  background: none;
+  color: #8ccc52;
 }
 
 .backBtn {
@@ -398,11 +402,6 @@ body {
 
 .nextBtn {
   right: 50px;
-}
-
-.backBtn:hover, .nextBtn:hover {
-  background-color: #0c2002;
-  color: white;
 }
 
 @media only screen and (max-width: 550px) {
@@ -440,10 +439,6 @@ body {
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
     font-size: 2rem;
-  }
-  .backBtn:hover, .nextBtn:hover {
-    background: none;
-    color: #8ccc52;
   }
   
 }
