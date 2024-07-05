@@ -435,6 +435,17 @@ body {
   .nextBtn {
     right: 0px;
   }
+  .backBtn, .nextBtn {
+    top: 30%;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    font-size: 2rem;
+  }
+  .backBtn:hover, .nextBtn:hover {
+    background: none;
+    color: #8ccc52;
+  }
+  
 }
 
 /*Search Error*/
