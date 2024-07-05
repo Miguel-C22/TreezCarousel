@@ -1,4 +1,5 @@
 import React from 'react'
+import { ProductStatus } from '../schema/products'
 
 type item = {
     item: any,
@@ -15,9 +16,31 @@ const closeModel = () => {
 function formatStatus(status: string) {
     // Replace underscores with spaces and capitalize the first letter
     return status.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
-  }
+}
 
-  return (
+const displayItemStatus = (itemStatus: ProductStatus ) => {
+
+    switch (itemStatus) {
+        case ProductStatus.Regular:
+            return <div className="statusRegular"></div>
+        case ProductStatus.LowStock:
+            return <p className="statusLowStock">{formatStatus(itemStatus)}</p>
+        case ProductStatus.OutOfStock:
+            return <p className="statusOutOfStock">{formatStatus(itemStatus)}</p>
+        case ProductStatus.PreOrder:
+            return <p className="statusPreOrder">{formatStatus(itemStatus)}</p>
+        case ProductStatus.NewArrival:
+            return <p className="statusNewArrival">{formatStatus(itemStatus)}</p>
+        case ProductStatus.Discontinued:
+            return <p className="statusDiscontinued">{formatStatus(itemStatus)}</p>
+        case ProductStatus.Sale:
+            return <p className="statusSale">{formatStatus(itemStatus)}</p>
+        default:
+            return ""
+    }
+}
+
+return (
     <div className='modal_container'>
         <div className='modal_item_content'>
             <img className="modal_image" src={item.images[0]} alt={item.name} />
@@ -26,13 +49,7 @@ function formatStatus(status: string) {
                     <h1>{item.name}</h1>
                     <h2>${item.price.toFixed(2)}</h2>
                 </div>
-                {item.status === "regular" && <div className="statusRegular"></div>}
-                {item.status === "low_stock" && <p className="statusLowStock">{formatStatus(item.status)}</p>}
-                {item.status === "out_of_stock" && <p className="statusOutOfStock">{formatStatus(item.status)}</p>}
-                {item.status === "pre_order" && <p className="statusPreOrder">{formatStatus(item.status)}</p>}
-                {item.status === "new_arrival" && <p className="statusNewArrival">{formatStatus(item.status)}</p>}
-                {item.status === "discontinued" && <p className="statusDiscontinued">{formatStatus(item.status)}</p>}
-                {item.status === "on_sale" && <p className="statusSale">{formatStatus(item.status)}</p>}
+                {displayItemStatus(item.status)}
                 <div>
                     <h2>Product description</h2>
                     <p>{item.description}</p>

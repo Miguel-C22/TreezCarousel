@@ -1,6 +1,6 @@
 import Carousel from "./components/Carousel";
 import CorrectCarousel from "./components/CorrectCarousel";
-import useToggle from "./hooks/toggle";
+import useToggle from "./hooks/modalToggle";
 
 function App() {
   const { toggleOnAndOff, toggle} = useToggle(false);

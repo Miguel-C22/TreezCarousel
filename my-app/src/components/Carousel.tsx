@@ -5,8 +5,7 @@ import Paging from './Paging';
 import DrawerCatagories from './DrawerCatagories';
 import DrawerBrands from './DrawerBrands';
 import Modal from './Modal';
-import useToggle from '../hooks/toggle';
-
+import useToggle from '../hooks/modalToggle';
 
 function Carousel() {
   //Carousel

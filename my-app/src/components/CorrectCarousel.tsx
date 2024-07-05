@@ -4,7 +4,7 @@ import { Product } from './../schema/products';
 import DrawerCatagories from './DrawerCatagories';
 import DrawerBrands from './DrawerBrands';
 import Modal from './Modal';
-import useToggle from '../hooks/toggle';
+import useToggle from '../hooks/modalToggle';
 
 
 function CorrectCarousel() {
@@ -20,13 +20,14 @@ function CorrectCarousel() {
     const { toggleOnAndOff, toggle } = useToggle(false);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredItems.length);
-      }, 5000);
-
-      return () => clearInterval(interval);
-    },[filteredItems.length])
-
+        if(filteredItems.length > 1){
+            const interval = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredItems.length);
+            }, 5000);
+        
+            return () => clearInterval(interval);
+           }
+    }, [filteredItems.length, currentIndex]);
    
   
     const getFilteredItems = (filterInput: string): Product[] => {
@@ -67,8 +68,9 @@ function CorrectCarousel() {
     };
 
     const resetToAllItems = () => {
-        setFilteredItems(allItems);
-      };
+        setFilteredItems([...allItems]);
+        setCurrentIndex(0);
+    };
 
   return (
     <div className="correct_carousel_container">
@@ -87,37 +89,41 @@ function CorrectCarousel() {
         <button type='submit'>Search</button>
       </form>
 
-      {filteredItems.length > 0 ? (
-        <div className="correct_carousel">
-          {filteredItems.map((item, index) => (
-            <div
-              className={`correct_item_container ${index === currentIndex ? 'active' : 'hidden'}`}
-              key={item.id}
-              onClick={() => toggleModal(item)}
-            >
-              <img
-                className="correct_carousel_Images"
-                src={item.images[0]}
-                alt={item.name}
-              />
-              <div className="correct_carousel_item_description">
-                <h4>{item.name}</h4>
-                <h4>${item.price.toFixed(2)}</h4>
-              </div>
+        {filteredItems.length > 0 ? (
+        <div className="carousel_wrapper">
+        <button type="button" className='backBtn' onClick={backItem}>&#60;</button>
+            <div className="correct_carousel">
+                {filteredItems.map((item, index) => (
+                <div
+                    className={`correct_item_container ${index === currentIndex ? 'active' : 'hidden'}`}
+                    key={item.id}
+                    onClick={() => toggleModal(item)}
+                >
+                    <img
+                    className="correct_carousel_Images"
+                    src={item.images[0]}
+                    alt={item.name}
+                    />
+                    <div className="correct_carousel_item_description">
+                    <h4>{item.name}</h4>
+                    <h4>${item.price.toFixed(2)}</h4>
+                    </div>
+                </div>
+                ))}
             </div>
-          ))}
+          <button type="button" className='nextBtn' onClick={nextItem}>&#62;</button>
+          <div className="circle-container">
+            {filteredItems.map((item, index) => (
+                <div key={index} onClick={() => {setCurrentIndex(index)}} className={`circle ${index === currentIndex ? 'active' : ''}`}></div>
+            ))}
+            </div>
+          </div>
+        ) : (
+        <div className='errorSearch'>
+            <p className='searchError'>We do not carry this item</p>
+            <button className='btn' onClick={resetToAllItems}>Back to all items</button>
         </div>
-      ) : (
-        <p className='searchError'>We do not carry this item</p>
-      )}
-
-      {filteredItems.length > 0 ? 
-      <div className='correct_carousel_btn'>
-        <button type="button" className='backBtn' onClick={backItem}>Back</button>
-        <button type="button" className='nextBtn' onClick={nextItem}>Next</button>
-      </div> 
-      :  
-      <button className='btn' onClick={resetToAllItems}>Back to all items</button>}
+        )}
 
       {toggleOnAndOff && modalItem && (
         <Modal item={modalItem} toggleOnAndOff={toggleOnAndOff} toggle={toggle} />
